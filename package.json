@@ -6,7 +6,7 @@
     "dev": "remix dev",
     "start": "netlify serve",
     "typecheck": "tsc",
-    "cosmos": "cosmos",
+    "cosmos": "cosmos --expose-imports",
     "cosmos:export": "cosmos-export"
   },
   "dependencies": {

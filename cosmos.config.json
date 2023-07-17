@@ -2,5 +2,7 @@
   "staticPath": "public",
   "watchDirs": ["app"],
   "userDepsFilePath": "app/cosmos.userdeps.js",
-  "experimentalRendererUrl": "http://localhost:3000/cosmos"
+  "experimentalRendererUrl": "http://localhost:3000/cosmos",
+  "port": 5000,
+  "rendererUrl": "http://localhost:3000/cosmos"
 }
