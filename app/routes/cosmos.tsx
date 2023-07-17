@@ -14,7 +14,7 @@ export default function Cosmos() {
   const [cosmosLoaded, setCosmosLoaded] = useState(false);
 
   const loadRenderer = useCallback(async () => {
-    const { mountDomRenderer } = await import("react-cosmos-dom");
+    const { mountDomRenderer } = (await import("react-cosmos-dom")).default;
     mountDomRenderer({ decorators, fixtures, rendererConfig });
   }, []);
 
