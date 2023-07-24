@@ -3,10 +3,20 @@
 
 import { RendererConfig, UserModuleWrappers } from 'react-cosmos-core';
 
-import * as fixture0 from './components/ProgressCard/ProgressCard.fixture';
-import * as fixture1 from './components/Header/Header.fixture';
-import * as fixture2 from './components/Card/Card.fixture';
-import * as fixture3 from './components/Button/Button.fixture.jsx';
+import * as fixture0 from './components/UserActions/UserActions.fixture.jsx';
+import * as fixture1 from './components/RawConfig/RawConfig.fixture.jsx';
+import * as fixture2 from './components/QrCode/QrCode.fixture.jsx';
+import * as fixture3 from './components/PropTable/PropTable.fixture.jsx';
+import * as fixture4 from './components/PropKeyVal/PropKeyVal.fixture.jsx';
+import * as fixture5 from './components/ProgressCard/ProgressCard.fixture';
+import * as fixture6 from './components/Popover/Popover.fixture.jsx';
+import * as fixture7 from './components/Metrics/Metrics.fixture.jsx';
+import * as fixture8 from './components/EventList/EventList.fixture.jsx';
+import * as fixture9 from './components/EventHistory/EventHistory.fixture.jsx';
+import * as fixture10 from './components/CodeScanner/CodeScanner.fixture.jsx';
+import * as fixture11 from './components/BugModal/BugModal.fixture.jsx';
+import * as fixture12 from './components/AssetTable/AssetTable.fixture.jsx';
+import * as fixture13 from './components/AssetLink/AssetLink.fixture.jsx';
 
 export const rendererConfig: RendererConfig = {
   "playgroundUrl": "http://localhost:5000",
@@ -14,10 +24,20 @@ export const rendererConfig: RendererConfig = {
 };
 
 const fixtures = {
-  'components/ProgressCard/ProgressCard.fixture.tsx': { module: fixture0 },
-  'components/Header/Header.fixture.tsx': { module: fixture1 },
-  'components/Card/Card.fixture.tsx': { module: fixture2 },
-  'components/Button/Button.fixture.jsx': { module: fixture3 }
+  'components/UserActions/UserActions.fixture.jsx': { module: fixture0 },
+  'components/RawConfig/RawConfig.fixture.jsx': { module: fixture1 },
+  'components/QrCode/QrCode.fixture.jsx': { module: fixture2 },
+  'components/PropTable/PropTable.fixture.jsx': { module: fixture3 },
+  'components/PropKeyVal/PropKeyVal.fixture.jsx': { module: fixture4 },
+  'components/ProgressCard/ProgressCard.fixture.tsx': { module: fixture5 },
+  'components/Popover/Popover.fixture.jsx': { module: fixture6 },
+  'components/Metrics/Metrics.fixture.jsx': { module: fixture7 },
+  'components/EventList/EventList.fixture.jsx': { module: fixture8 },
+  'components/EventHistory/EventHistory.fixture.jsx': { module: fixture9 },
+  'components/CodeScanner/CodeScanner.fixture.jsx': { module: fixture10 },
+  'components/BugModal/BugModal.fixture.jsx': { module: fixture11 },
+  'components/AssetTable/AssetTable.fixture.jsx': { module: fixture12 },
+  'components/AssetLink/AssetLink.fixture.jsx': { module: fixture13 }
 };
 
 const decorators = {};
