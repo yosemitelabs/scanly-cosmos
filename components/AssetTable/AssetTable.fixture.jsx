@@ -1,8 +1,9 @@
 import { Box } from "@mantine/core";
 import CosmosLayout from "components/CosmosLayout/CosmosLayout";
+import AssetTable from "./AssetTable";
 
 const code = `
-  code
+  <AssetTable elements={elements} />
 `;
 
 const config = `
@@ -33,6 +34,14 @@ requires:
       - operations_manager
 `;
 
+// sample of elements
+const elements = [
+  { property: "box_number", value: "99", test: "1" },
+  { property: "customer", value: "bandit", test: "1" },
+  { property: "tobacco_type", value: "ooo", test: "1" },
+  { property: "tobacco_box_status", value: "production", test: "1" },
+];
+
 export default function AssetTableFixture() {
   return (
     <CosmosLayout
@@ -41,7 +50,7 @@ export default function AssetTableFixture() {
       code={code}
       config={config}
     >
-      <Box>content</Box>
+      <AssetTable label="Boxes" elements={elements} />
     </CosmosLayout>
   );
 }

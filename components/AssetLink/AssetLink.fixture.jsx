@@ -1,8 +1,12 @@
 import { Box } from "@mantine/core";
 import CosmosLayout from "components/CosmosLayout/CosmosLayout";
+import AssetLink from "./AssetLink";
 
 const code = `
-  code
+  <AssetLink
+  label="Invoice"
+  ref="Asset.tobacco_box.props.tobacco_invoice"
+  />
 `;
 
 const config = `
@@ -29,7 +33,12 @@ export default function AssetLinkFixture() {
       code={code}
       config={config}
     >
-      <Box>content</Box>
+      <Box>
+        <AssetLink
+          label="Invoice"
+          scanlyRef="Asset.tobacco_box.props.tobacco_invoice"
+        />
+      </Box>
     </CosmosLayout>
   );
 }

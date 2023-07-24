@@ -19,11 +19,11 @@ const CosmosLayout: React.FC<CosmosLayoutProps> = ({
 }) => {
   return (
     <Box p={24}>
-      <Flex justify="space-between">
+      <Flex mb="md" justify="space-between" align="center">
         <Text sx={{ fontSize: "24px", fontWeight: 600 }} component="h1">
           {title}
         </Text>
-        <Badge size="xl" sx={{ textTransform: "lowercase" }}>
+        <Badge color="indigo" size="xl" sx={{ textTransform: "lowercase" }}>
           {componentName}
         </Badge>
       </Flex>
