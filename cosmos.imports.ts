@@ -12,10 +12,11 @@ import * as fixture5 from './components/Popover/Popover.fixture.jsx';
 import * as fixture6 from './components/Metrics/Metrics.fixture.jsx';
 import * as fixture7 from './components/EventList/EventList.fixture.jsx';
 import * as fixture8 from './components/EventHistory/EventHistory.fixture.jsx';
-import * as fixture9 from './components/CodeScanner/CodeScanner.fixture.jsx';
-import * as fixture10 from './components/BugModal/BugModal.fixture.jsx';
-import * as fixture11 from './components/AssetTable/AssetTable.fixture.jsx';
-import * as fixture12 from './components/AssetLink/AssetLink.fixture.jsx';
+import * as fixture9 from './components/EventCard/EventCard.fixture.jsx';
+import * as fixture10 from './components/CodeScanner/CodeScanner.fixture.jsx';
+import * as fixture11 from './components/BugModal/BugModal.fixture.jsx';
+import * as fixture12 from './components/AssetTable/AssetTable.fixture.jsx';
+import * as fixture13 from './components/AssetLink/AssetLink.fixture.jsx';
 
 export const rendererConfig: RendererConfig = {
   "playgroundUrl": "http://localhost:5000",
@@ -32,10 +33,11 @@ const fixtures = {
   'components/Metrics/Metrics.fixture.jsx': { module: fixture6 },
   'components/EventList/EventList.fixture.jsx': { module: fixture7 },
   'components/EventHistory/EventHistory.fixture.jsx': { module: fixture8 },
-  'components/CodeScanner/CodeScanner.fixture.jsx': { module: fixture9 },
-  'components/BugModal/BugModal.fixture.jsx': { module: fixture10 },
-  'components/AssetTable/AssetTable.fixture.jsx': { module: fixture11 },
-  'components/AssetLink/AssetLink.fixture.jsx': { module: fixture12 }
+  'components/EventCard/EventCard.fixture.jsx': { module: fixture9 },
+  'components/CodeScanner/CodeScanner.fixture.jsx': { module: fixture10 },
+  'components/BugModal/BugModal.fixture.jsx': { module: fixture11 },
+  'components/AssetTable/AssetTable.fixture.jsx': { module: fixture12 },
+  'components/AssetLink/AssetLink.fixture.jsx': { module: fixture13 }
 };
 
 const decorators = {};

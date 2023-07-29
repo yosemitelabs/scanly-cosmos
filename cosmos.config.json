@@ -1,6 +1,6 @@
 {
-  "staticPath": "public",
-  "watchDirs": ["app"],
+  "staticPath": ".",
+  "watchDirs": ["app", "components"],
   "rendererUrl": "http://localhost:3000/cosmos",
   "port": 5000
 }

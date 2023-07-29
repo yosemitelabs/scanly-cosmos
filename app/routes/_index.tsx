@@ -1,5 +1,6 @@
-import { Box } from "@mantine/core";
+import { Box, Button } from "@mantine/core";
 import type { V2_MetaFunction } from "@remix-run/node";
+import AssetTable from "components/AssetTable/AssetTable";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -37,6 +38,9 @@ export default function Index() {
           </a>
         </li>
       </ul>
+
+      <AssetTable label="Boxes" />
+      <Button>test</Button>
     </Box>
   );
 }
