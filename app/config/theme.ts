@@ -28,9 +28,6 @@ const theme: MantineThemeOverride = {
     ],
   },
   globalStyles: (theme) => ({
-    "#__next": {
-      height: "100%",
-    },
     body: {
       height: "100%",
       overflowX: "hidden",
