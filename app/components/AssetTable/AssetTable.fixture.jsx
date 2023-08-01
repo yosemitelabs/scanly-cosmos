@@ -1,4 +1,3 @@
-import { Box } from "@mantine/core";
 import CosmosLayout from "app/components/CosmosLayout/CosmosLayout";
 import AssetTable from "./AssetTable";
 
@@ -30,6 +29,16 @@ columns:
   - column_label: Status
     prop_ref: Asset.tobacco_box.props.tobacco_box_status
     component_type: badge
+    component_color:
+      - filters:
+        - color: green
+          val: complete
+        - key_type: asset_prop
+          prop_ref: Asset.tobacco_box.props.cuts_yield_pct
+          operation: gt
+          val_type: literal
+          val: .5
+        color: green
   - column_label: Delivered weight
     prop_ref: Asset.tobacco_box.props.delivered_weight_lbs
 sort_props:

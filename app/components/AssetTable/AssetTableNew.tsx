@@ -1,4 +1,4 @@
-import { Accordion, Badge, Progress, Table, Text } from "@mantine/core";
+import { Accordion, Badge, Flex, Progress, Table, Text } from "@mantine/core";
 import React, { useMemo } from "react";
 import type { SortingState } from "@tanstack/react-table";
 import {
@@ -168,23 +168,25 @@ const AssetTableNew: React.FC<AssetTableNewProps> = ({ label }) => {
                         style={{ whiteSpace: "nowrap" }}
                       >
                         {header.isPlaceholder ? null : (
-                          <div
-                            {...{
-                              className: header.column.getCanSort()
-                                ? "cursor-pointer select-none"
-                                : "",
-                              onClick: header.column.getToggleSortingHandler(),
+                          <Flex
+                            sx={{
+                              cursor: header.column.getCanSort()
+                                ? "pointer"
+                                : "initial",
                             }}
+                            onClick={header.column.getToggleSortingHandler()}
                           >
-                            {flexRender(
-                              header.column.columnDef.header,
-                              header.getContext()
-                            )}
+                            <Text mr="xs">
+                              {flexRender(
+                                header.column.columnDef.header,
+                                header.getContext()
+                              )}
+                            </Text>
                             {{
                               asc: " 🔼",
                               desc: " 🔽",
                             }[header.column.getIsSorted() as string] ?? null}
-                          </div>
+                          </Flex>
                         )}
                       </th>
                     );
