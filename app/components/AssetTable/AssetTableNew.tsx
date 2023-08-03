@@ -1,4 +1,5 @@
-import { Accordion, Badge, Flex, Progress, Table, Text } from "@mantine/core";
+import { Accordion, Checkbox, Flex, Table, Text } from "@mantine/core";
+import type { HTMLProps } from "react";
 import React, { useMemo } from "react";
 import type { SortingState } from "@tanstack/react-table";
 import {
@@ -8,10 +9,37 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import CustomBadge from "../Badge/Badge";
+import CustomProgress from "../Progress/Progress";
+import UserActions from "../UserActions/UserActions";
 
 interface AssetTableNewProps {
   elements?: any;
   label: string;
+}
+
+function IndeterminateCheckbox({
+  indeterminate,
+  className = "",
+  ...rest
+}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
+  const ref = React.useRef<HTMLInputElement>(null!);
+
+  React.useEffect(() => {
+    if (typeof indeterminate === "boolean") {
+      ref.current.indeterminate = !rest.checked && indeterminate;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ref, indeterminate]);
+
+  return (
+    <Checkbox
+      type="checkbox"
+      ref={ref as any}
+      className={className + " cursor-pointer"}
+      {...rest}
+    />
+  );
 }
 
 const defaultData: any[] = [
@@ -21,7 +49,7 @@ const defaultData: any[] = [
     box_number: "1",
     tobacco_box_status: "delivered",
     delivered_weight_lbs: 4.0,
-    progress_sample: 80,
+    progress_sample: 40,
   },
   {
     customer: "bandit",
@@ -30,6 +58,14 @@ const defaultData: any[] = [
     tobacco_box_status: "production",
     delivered_weight_lbs: 2.0,
     progress_sample: 100,
+  },
+  {
+    customer: "bandit",
+    invoice_number: "2",
+    box_number: "2",
+    tobacco_box_status: "production",
+    delivered_weight_lbs: 4.0,
+    progress_sample: 10,
   },
 ];
 
@@ -61,7 +97,16 @@ const columnData: any[] = [
     prop_ref: "Asset.tobacco_box.props.tobacco_box_status",
     component_type: "badge",
     component_props: {
-      color: "green",
+      color: [
+        {
+          color: "green",
+          val: "delivered",
+        },
+        {
+          color: "yellow",
+          val: "production",
+        },
+      ],
     },
     asset: {
       prop_name: "tobacco_box_status",
@@ -79,11 +124,72 @@ const columnData: any[] = [
     prop_ref: "Asset.tobacco_box.props.progress_sample",
     component_type: "progress",
     component_props: {
-      color: "red",
+      color: [
+        {
+          color: "green",
+          val: 100,
+        },
+        {
+          color: "yellow",
+          val: 60,
+        },
+        {
+          color: "red",
+          val: 20,
+        },
+      ],
     },
     asset: {
       prop_name: "progress_sample",
     },
+  },
+];
+
+const userActions = [
+  {
+    label: "Box delivered",
+    scanlyRef: "Event.tobacco_box_delivered.assets.tobacco_box",
+    scanlyEventRef: "Event.tobacco_box_delivered",
+  },
+  {
+    label: "Sorting complete",
+    scanlyRef: "Event.tobacco_box_sorting_complete.assets.tobacco_box",
+    scanlyEventRef: "Event.tobacco_box_sorting_complete",
+  },
+  {
+    label: "Start production",
+    scanlyRef: "Event.tobacco_box_start_production.assets.tobacco_box",
+    scanlyEventRef: "Event.tobacco_box_start_production",
+  },
+  {
+    label: "Worker log cuts",
+    scanlyRef: "Event.worker_log_cuts.assets.tobacco_box",
+    scanlyEventRef: "Event.worker_log_cuts",
+  },
+  {
+    label: "Worker log pouches",
+    scanlyRef: "Event.worker_log_pouches.assets.tobacco_box",
+    scanlyEventRef: "Event.worker_log_pouches",
+  },
+  {
+    label: "Log by product",
+    scanlyRef: "Event.tobacco_box_log_by_product.assets.tobacco_box",
+    scanlyEventRef: "Event.tobacco_box_log_by_product",
+  },
+  {
+    label: "Log master case",
+    scanlyRef: "Event.tobacco_box_log_master_case.assets.tobacco_box",
+    scanlyEventRef: "Event.tobacco_box_log_master_case",
+  },
+  {
+    label: "Box complete",
+    scanlyRef: "Event.tobacco_box_complete.assets.tobacco_box",
+    scanlyEventRef: "Event.tobacco_box_complete",
+  },
+  {
+    label: "Box cost",
+    scanlyRef: "Event.tobacco_box_cost.assets.tobacco_box",
+    scanlyEventRef: "Event.tobacco_box_cost",
   },
 ];
 
@@ -92,15 +198,24 @@ const columnHelper = createColumnHelper<any>();
 const AssetTableNew: React.FC<AssetTableNewProps> = ({ label }) => {
   const [data] = React.useState(() => [...defaultData]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [rowSelection, setRowSelection] = React.useState({});
 
   const renderColumnCell = (value: any, info: any) => {
     if (value?.component_type) {
       switch (value?.component_type) {
         case "badge":
-          return <Badge {...value?.component_props}>{info?.getValue()}</Badge>;
+          return (
+            <CustomBadge
+              color={value?.component_props?.color}
+              value={info?.getValue()}
+            />
+          );
         case "progress":
           return (
-            <Progress value={info?.getValue()} {...value?.component_props} />
+            <CustomProgress
+              value={info?.getValue()}
+              color={value?.component_props?.color}
+            />
           );
         default:
           break;
@@ -111,12 +226,40 @@ const AssetTableNew: React.FC<AssetTableNewProps> = ({ label }) => {
   };
 
   const columns: any = useMemo(() => {
-    return columnData.map((value) =>
+    const data = columnData.map((value) =>
       columnHelper.accessor(value?.asset?.prop_name, {
         header: () => <Text>{value?.column_label}</Text>,
         cell: (info) => renderColumnCell(value, info),
       })
     );
+
+    return [
+      {
+        id: "select",
+        header: ({ table }) => (
+          <IndeterminateCheckbox
+            {...{
+              checked: table.getIsAllRowsSelected(),
+              indeterminate: table.getIsSomeRowsSelected(),
+              onChange: table.getToggleAllRowsSelectedHandler(),
+            }}
+          />
+        ),
+        cell: ({ row }) => (
+          <div className="px-1">
+            <IndeterminateCheckbox
+              {...{
+                checked: row.getIsSelected(),
+                disabled: !row.getCanSelect(),
+                indeterminate: row.getIsSomeSelected(),
+                onChange: row.getToggleSelectedHandler(),
+              }}
+            />
+          </div>
+        ),
+      },
+      ...data,
+    ];
   }, []);
 
   const table = useReactTable({
@@ -124,14 +267,16 @@ const AssetTableNew: React.FC<AssetTableNewProps> = ({ label }) => {
     columns,
     state: {
       sorting,
+      rowSelection,
     },
+    enableRowSelection: true, //enable row selection for all rows
+    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     debugTable: true,
   });
-
-  console.log("COLUMNS", columns);
 
   return (
     <Accordion
@@ -156,6 +301,16 @@ const AssetTableNew: React.FC<AssetTableNewProps> = ({ label }) => {
       <Accordion.Item value={label}>
         <Accordion.Control>{label}</Accordion.Control>
         <Accordion.Panel>
+          {Object.keys(rowSelection).length > 0 && (
+            <UserActions
+              userActions={userActions}
+              label={`Actions for boxes selected: ${
+                Object.keys(rowSelection).length
+              }`}
+              isDefaultOpen
+            />
+          )}
+
           <Table>
             <thead>
               {table.getHeaderGroups().map((headerGroup) => (
