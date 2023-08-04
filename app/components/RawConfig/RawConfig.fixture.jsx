@@ -1,21 +1,18 @@
-import { Box } from "@mantine/core";
+import { Prism } from "@mantine/prism";
 import CosmosLayout from "app/components/CosmosLayout/CosmosLayout";
-
-const code = `
-  code
-`;
-
-const config = null;
+import { config } from "./kandd";
 
 export default function RawConfigFixture() {
   return (
     <CosmosLayout
       title="Raw Config"
       componentName="raw_config"
-      code={code}
-      config={config}
+      code={null}
+      config={null}
     >
-      <Box>content</Box>
+      <Prism colorScheme="dark" language="yaml">
+        {config}
+      </Prism>
     </CosmosLayout>
   );
 }

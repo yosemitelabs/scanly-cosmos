@@ -1,8 +1,8 @@
-import { Box } from "@mantine/core";
 import CosmosLayout from "app/components/CosmosLayout/CosmosLayout";
+import CodeScanner from "./CodeScanner";
 
 const code = `
-  code
+  <CodeScanner />
 `;
 
 const config = null;
@@ -15,7 +15,7 @@ export default function CodeScannerFixture() {
       code={code}
       config={config}
     >
-      <Box>content</Box>
+      <CodeScanner />
     </CosmosLayout>
   );
 }

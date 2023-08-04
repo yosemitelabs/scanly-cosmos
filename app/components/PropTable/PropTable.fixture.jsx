@@ -25,7 +25,7 @@ requires:
 `;
 
 // sample of elements
-const elements = [
+const data = [
   { property: "box_number", value: "99" },
   { property: "customer", value: "bandit" },
   { property: "tobacco_type", value: "ooo" },
@@ -41,7 +41,7 @@ export default function PropTableFixture() {
       config={config}
     >
       <Box>
-        <PropTable elements={elements} />
+        <PropTable data={data} />
       </Box>
     </CosmosLayout>
   );

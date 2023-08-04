@@ -28,17 +28,17 @@ columns:
     prop_ref: Asset.tobacco_box.props.box_number
   - column_label: Status
     prop_ref: Asset.tobacco_box.props.tobacco_box_status
-    component_type: badge
-    component_color:
-      - filters:
+    type: badge
+    [component_type_name]_style
+    asset_link_style
+    progress_style
+    badge_style
+      size: xl
+      colors:
         - color: green
           val: complete
-        - key_type: asset_prop
-          prop_ref: Asset.tobacco_box.props.cuts_yield_pct
-          operation: gt
-          val_type: literal
-          val: .5
-        color: green
+        - color: yellow
+          val: ongoing
   - column_label: Delivered weight
     prop_ref: Asset.tobacco_box.props.delivered_weight_lbs
 sort_props:

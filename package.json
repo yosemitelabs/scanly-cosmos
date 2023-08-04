@@ -23,9 +23,11 @@
     "@remix-run/react": "^1.18.1",
     "@tabler/icons-react": "^2.26.0",
     "@tanstack/react-table": "^8.9.3",
+    "@yudiel/react-qr-scanner": "^1.1.10",
     "cross-env": "^7.0.3",
     "isbot": "^3.6.8",
     "lodash": "^4.17.21",
+    "qr-scanner": "^1.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },

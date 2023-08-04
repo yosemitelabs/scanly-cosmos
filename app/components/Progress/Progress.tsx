@@ -2,17 +2,20 @@ import { Progress } from "@mantine/core";
 import React from "react";
 
 interface CustomProgressProps {
-  color: any;
+  progressStyles: any;
   value: any;
 }
 
 const CustomProgress: React.FC<CustomProgressProps> = ({
-  color,
+  progressStyles,
   value,
 }): any => {
   const getComponentColor = () => {
     // get closest value depending on config colors
-    const closest = color?.reduce(function (prev: any, curr: any) {
+    const closest = progressStyles?.colors?.reduce(function (
+      prev: any,
+      curr: any
+    ) {
       return Math.abs(curr?.val - value) < Math.abs(prev?.val - value)
         ? curr
         : prev;
@@ -21,7 +24,9 @@ const CustomProgress: React.FC<CustomProgressProps> = ({
     return closest?.color;
   };
 
-  return <Progress color={getComponentColor()} value={value} />;
+  return (
+    <Progress {...progressStyles} color={getComponentColor()} value={value} />
+  );
 };
 
 export default CustomProgress;

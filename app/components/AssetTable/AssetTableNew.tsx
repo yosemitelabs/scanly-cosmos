@@ -96,8 +96,9 @@ const columnData: any[] = [
     column_label: "Status",
     prop_ref: "Asset.tobacco_box.props.tobacco_box_status",
     component_type: "badge",
-    component_props: {
-      color: [
+    badge_styles: {
+      size: "lg",
+      colors: [
         {
           color: "green",
           val: "delivered",
@@ -122,9 +123,10 @@ const columnData: any[] = [
   {
     column_label: "Progress sample",
     prop_ref: "Asset.tobacco_box.props.progress_sample",
-    component_type: "progress",
-    component_props: {
-      color: [
+    type: "progress",
+    progress_styles: {
+      size: "md",
+      colors: [
         {
           color: "green",
           val: 100,
@@ -206,15 +208,15 @@ const AssetTableNew: React.FC<AssetTableNewProps> = ({ label }) => {
         case "badge":
           return (
             <CustomBadge
-              color={value?.component_props?.color}
               value={info?.getValue()}
+              badgeStyles={value?.badge_styles}
             />
           );
         case "progress":
           return (
             <CustomProgress
               value={info?.getValue()}
-              color={value?.component_props?.color}
+              progressStyles={value?.progress_styles}
             />
           );
         default:

@@ -1,5 +1,5 @@
-import { Box } from "@mantine/core";
 import CosmosLayout from "app/components/CosmosLayout/CosmosLayout";
+import Metrics from "./Metrics";
 
 const code = `
   code
@@ -28,7 +28,10 @@ export default function MetricsFixture() {
       code={code}
       config={config}
     >
-      <Box>content</Box>
+      <Metrics
+        title="metrics"
+        src="https://my-deployment-0a8760.kb.us-east-1.aws.found.io:9243/s/firelyfe/app/dashboards?auth_provider_hint=firetest#/view/e5688370-cf18-11ed-b423-15139ce43efb?embed=true&_g=(refreshInterval%3A(pause%3A!f%2Cvalue%3A5000)%2Ctime%3A(from%3Anow-4d%2Cto%3Anow))&show-time-filter=true"
+      />
     </CosmosLayout>
   );
 }

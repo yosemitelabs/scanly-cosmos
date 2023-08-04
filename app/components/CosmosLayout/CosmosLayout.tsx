@@ -3,7 +3,7 @@ import { Prism } from "@mantine/prism";
 import React from "react";
 
 interface CosmosLayoutProps {
-  code: string;
+  code: string | null;
   config: string | null;
   children: React.ReactNode;
   title: string;
@@ -38,12 +38,14 @@ const CosmosLayout: React.FC<CosmosLayoutProps> = ({
             </Prism>
           </Col>
         )}
-        <Col span={12}>
-          <Text component="h2">Code</Text>
-          <Prism colorScheme="dark" language="tsx">
-            {code}
-          </Prism>
-        </Col>
+        {code && (
+          <Col span={12}>
+            <Text component="h2">Code</Text>
+            <Prism colorScheme="dark" language="tsx">
+              {code}
+            </Prism>
+          </Col>
+        )}
       </Grid>
     </Box>
   );

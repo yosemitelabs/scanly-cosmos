@@ -1,11 +1,12 @@
 import { Card, Table } from "@mantine/core";
+import { startCase } from "lodash";
 import React from "react";
 
-interface PropTableProps {
+interface PropKeyValProps {
   data: any;
 }
 
-const PropTable: React.FC<PropTableProps> = ({ data }) => {
+const PropKeyVal: React.FC<PropKeyValProps> = ({ data }) => {
   const rows = data.map((element: any, index: number) => (
     <tr key={index}>
       {Object.keys(element)?.map((value) => (
@@ -15,7 +16,7 @@ const PropTable: React.FC<PropTableProps> = ({ data }) => {
   ));
 
   const headers = Object.keys(data[0]).map((value: any) => (
-    <th key={value}> {value}</th>
+    <th key={value}>{startCase(value)}</th>
   ));
 
   return (
@@ -38,4 +39,4 @@ const PropTable: React.FC<PropTableProps> = ({ data }) => {
   );
 };
 
-export default PropTable;
+export default PropKeyVal;

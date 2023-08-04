@@ -12,23 +12,26 @@ table_name: tobacco_box_table
 asset_ref: Asset.tobacco_box
 label: Tobacco Box
 columns:
-  - column_label: Status
-    prop_ref: Asset.tobacco_box.props.tobacco_box_status
-    component_type: badge
-    component_color:
+  - column_label: Progress Sample
+    prop_ref: Asset.tobacco_box.props.progress_sample
+    type: progress
+    badge_style:
+    size: lg
+    colors:
       - color: green
-        val: complete
-      - color: ongoing
-        val: yellow
+        val: 100
+      - color: yellow
+        val: 60
 ---
 `;
 
 const progressDetails = {
   column_label: "Progress sample",
   prop_ref: "Asset.tobacco_box.props.progress_sample",
-  component_type: "progress",
-  component_props: {
-    color: [
+  type: "progress",
+  progress_styles: {
+    size: "lg",
+    colors: [
       {
         color: "green",
         val: 100,
@@ -54,7 +57,7 @@ export default function ProgressFixture() {
     >
       <CustomProgress
         value={40}
-        color={progressDetails?.component_props?.color}
+        progressStyles={progressDetails?.progress_styles}
       />
     </CosmosLayout>
   );

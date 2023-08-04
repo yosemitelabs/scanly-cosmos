@@ -2,18 +2,24 @@ import { Badge } from "@mantine/core";
 import React from "react";
 
 interface CustomBadgeProps {
-  color: any;
   value: any;
+  badgeStyles: any;
 }
 
-const CustomBadge: React.FC<CustomBadgeProps> = ({ color, value }) => {
+const CustomBadge: React.FC<CustomBadgeProps> = ({ value, badgeStyles }) => {
   const getComponentColor = () => {
-    const colorIndex = color?.findIndex((data: any) => data.val === value);
+    const colorIndex = badgeStyles?.colors?.findIndex(
+      (data: any) => data.val === value
+    );
 
-    return color?.[colorIndex]?.color;
+    return badgeStyles?.colors?.[colorIndex]?.color;
   };
 
-  return <Badge color={getComponentColor()}>{value}</Badge>;
+  return (
+    <Badge {...badgeStyles} color={getComponentColor()}>
+      {value}
+    </Badge>
+  );
 };
 
 export default CustomBadge;

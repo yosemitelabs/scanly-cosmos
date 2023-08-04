@@ -3,19 +3,30 @@ import EventHistory from "./EventHistory";
 import { sample, uniqueId } from "lodash";
 
 const code = `
-  code
+  // data = asset_ref events
+<EventHistory data={productionEvents} />
 `;
 
 const config = `
-- section_type: event_history
-span: 12
-requires:
-  - key_type: context_prop
-    context_prop_name: role
-    operation: in
-    val_type: literal
-    val: 
-      - admin
+#region view product_sku_view
+schema_name: View
+view_name: product_sku_view
+asset_ref: Asset.product_sku
+path: "/"
+label: Product SKU
+sections:
+  - section_type: event_history
+    span: 12
+    requires:
+      - key_type: context_prop
+        context_prop_name: role
+        operation: in
+        val_type: literal
+        val:
+          - hr
+          - admin
+---
+#endregion
 `;
 
 const inventory = ["Tobacco leaves", "Pouches", "Cases", "Oil", "Canisters"];
